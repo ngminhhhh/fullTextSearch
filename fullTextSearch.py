@@ -88,7 +88,8 @@ class fullTextSearch:
         self.__preprocess_document()
         self.__build_inverted_index()
         self.__build_bm25()
-        self.search("chuyen tien")
+        # * Warm up 
+        self.search("chuyen tien", 0)
 
 
     def search(self, query, num = 10) -> list:
@@ -109,23 +110,13 @@ class fullTextSearch:
         if not candidate_docs:
             return []
         
-
-        
         candidate_docs = list(candidate_docs)
         candidate_indices = [doc_id for doc_id in candidate_docs]
         scores = self.bm25.get_batch_scores(query_terms, candidate_indices)
 
-        # candidate_corpus = [self.__corpus[doc_id] for doc_id in candidate_docs]
-        # bm25 = BM25Okapi(candidate_corpus)
-        # scores = bm25.get_scores(query_terms)
-
         doc_scores = list(zip(candidate_docs, scores))
 
         ranked_docs = sorted(doc_scores, key=lambda x: x[1], reverse=True)[:num]
-
-        # scores = self.bm25.get_scores(query_terms)
-        
-        # ranked_docs = sorted([(doc_id, score) for doc_id, score in enumerate(scores)], key=lambda x: x[1], reverse=True)[:num]
 
         return ranked_docs
     
