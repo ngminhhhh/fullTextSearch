@@ -33,7 +33,7 @@ class fullTextSearch:
         all_terms = set() # * Set of unique words in whole __documents
 
         for doc_id, data in self.__documents.items():
-            tokens = self.__preprocess_text(data['detail'])
+            tokens = self.__preprocess_text(' '.join([str(value) for value in data.values()]))
             term_freqs = defaultdict(int)
 
             # * Calculate frequency of words in each transactions   
@@ -89,7 +89,6 @@ class fullTextSearch:
         self.__build_inverted_index()
         self.__build_bm25()
         # * Warm up 
-        self.search("chuyen tien", 0)
 
 
     def search(self, query, num = 10) -> list:
@@ -97,6 +96,7 @@ class fullTextSearch:
             @ Params: query - string: query need to find
             Return 5 document most relevent
         '''
+
         query_terms = self.__preprocess_text(query)
 
         candidate_docs = set()

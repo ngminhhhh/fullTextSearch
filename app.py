@@ -6,6 +6,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 csv_filepath = os.path.join(os.path.dirname(__file__), 'chuyen_khoan.csv')
 fts = fullTextSearch(filename=csv_filepath)
+fts.search("chuyen tien 200000 09/09/2024")
 
 CORS(app)
 
@@ -39,4 +40,5 @@ def search_transactions():
     }), 200
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=False)
+
