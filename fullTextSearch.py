@@ -116,7 +116,7 @@ class fullTextSearch:
 
         doc_scores = list(zip(candidate_docs, scores))
 
-        ranked_docs = sorted(doc_scores, key=lambda x: x[1], reverse=True)[:num]
+        ranked_docs = sorted(doc_scores, key=lambda x: x[1], reverse=True)
 
         return ranked_docs
     
