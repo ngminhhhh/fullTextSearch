@@ -91,7 +91,7 @@ class fullTextSearch:
         # * Warm up 
 
 
-    def search(self, query, num = 10) -> list:
+    def search(self, query) -> list:
         '''
             @ Params: query - string: query need to find
             Return 5 document most relevent
